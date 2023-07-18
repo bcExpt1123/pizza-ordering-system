@@ -1,0 +1,22 @@
+table {
+  border-collapse: collapse;
+  max-width: 1200px;
+  margin: auto;
+}
+
+table, td, th {
+  border: 1px solid;
+}
+
+th, td {
+  padding: 8px;
+}
+
+.cell-topping-check {
+  min-width: 48px;
+  min-height: 48px;
+}
+
+.through-line {
+  text-decoration: line-through;
+}

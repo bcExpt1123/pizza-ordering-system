@@ -1,0 +1,61 @@
+<table>
+  <thead>
+  <tr>
+    <th rowspan="2">Toppings</th>
+    <th colspan="4">Pizza Size</th>
+  </tr>
+  <tr>
+    <th *ngFor="let pizzaSize of pizzaSizes">{{pizzaSize.label}} ({{pizzaSize.price | currency}})</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td colspan="5">Veg Toppings</td>
+  </tr>
+  <tr *ngFor="let topping of vegToppings">
+    <td>{{topping.label}} ({{topping.price | currency}})</td>
+    <td *ngFor="let pizzaSize of pizzaSizes" (click)="handleClick(topping.id, pizzaSize.id)" class="cell-topping-check">
+      <button mat-icon-button *ngIf="pizzaOrderBySize[pizzaSize.id].includes(topping.id)">
+        <mat-icon color="primary">check</mat-icon>
+      </button>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="5">Non Veg Toppings</td>
+  </tr>
+  <tr *ngFor="let topping of nonVegToppings">
+    <td>{{topping.label}} ({{topping.price | currency}})</td>
+    <td *ngFor="let pizzaSize of pizzaSizes" (click)="handleClick(topping.id, pizzaSize.id)" class="cell-topping-check">
+      <button mat-icon-button *ngIf="pizzaOrderBySize[pizzaSize.id].includes(topping.id)">
+        <mat-icon color="primary">check</mat-icon>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td colspan="5">
+      Total
+    </td>
+  </tr>
+  <tr>
+    <td>Offer</td>
+    <td *ngFor="let pizzaSize of pizzaSizes">
+      <div *ngIf="matchedOfferBySize[pizzaSize.id]">
+        {{matchedOfferBySize[pizzaSize.id].label}} - <mat-icon color="primary">check</mat-icon>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td *ngFor="let pizzaSize of pizzaSizes">
+      <div *ngIf="pizzaPriceBySize[pizzaSize.id] > 0" [class.through-line]="offerPriceBySize[pizzaSize.id] > 0">
+        {{pizzaPriceBySize[pizzaSize.id] | currency}}
+      </div>
+      <div *ngIf="offerPriceBySize[pizzaSize.id] > 0">
+        {{offerPriceBySize[pizzaSize.id] | currency}}
+      </div>
+    </td>
+  </tr>
+  </tfoot>
+</table>
